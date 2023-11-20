@@ -13,7 +13,8 @@ gem "jbuilder",        "2.11.5"
 gem "puma",            "5.6.5"
 gem "bootsnap",        "1.16.0", require: false
 gem "mysql2",          "~> 0.5"
-gem "bootstrap-sass",  "3.4.1"       
+gem "bootstrap-sass",  "3.4.1"
+gem "bcrypt",          "3.1.18"      
 
 group :development, :test do
   gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
