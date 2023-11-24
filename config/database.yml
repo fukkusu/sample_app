@@ -42,16 +42,15 @@ test:
 # the values provided in this file. Alternatively, you can specify a connection
 # URL environment variable explicitly:
 #
-#   production:
-#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
 #
 production:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  database: ror_example_app
-  username: ror_example_app_user
-  url: <%= ENV['postgres://ror_example_app_user:rYLlTA7rhOZFMDuqZLqujhWyXNlEUdba@dpg-clg39v6g1b2c73a52ai0-a/ror_example_app'] %>
+  database: dbname_v9kr
+  username: dbuser
+  url: 'postgres://dbuser:HuDcT0HNy5zQRVEo7Vt6c1566CUnxqEL@dpg-clg5746f27hc739godh0-a/dbname_v9kr'
+  port: 5432
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
