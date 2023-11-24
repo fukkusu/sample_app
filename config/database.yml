@@ -52,4 +52,4 @@ production:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['postgres://ror_example_app_user:rYLlTA7rhOZFMDuqZLqujhWyXNlEUdba@dpg-clg39v6g1b2c73a52ai0-a/ror_example_app'] %>
