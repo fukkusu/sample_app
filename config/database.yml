@@ -49,8 +49,7 @@ production:
   encoding: unicode
   database: dbname_v9kr
   username: dbuser
-  url: 'postgres://dbuser:HuDcT0HNy5zQRVEo7Vt6c1566CUnxqEL@dpg-clg5746f27hc739godh0-a/dbname_v9kr'
-  port: 5432
+  url: <%= ENV['DATABASE_URL'] %>
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
