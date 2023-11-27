@@ -60,7 +60,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # allow render as host:
-  # config.hosts << "rails-sample-app-ui1u.onrender.com"
+  config.hosts.clear
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
