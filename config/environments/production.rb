@@ -1,7 +1,7 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.web_console.allowed_ips = '10.210.94.19' 
+  config.web_console.allowed_ips = '172.70.143.95' 
   # according to https://qiita.com/P-man_Brown/items/b626bc430b324247ab16 and https://qiita.com/terufumi1122/items/73da039e6fc90ee0a63f
 
   # Settings specified here will take precedence over those in config/application.rb.
