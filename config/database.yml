@@ -47,8 +47,6 @@ production:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  username: dbuser
-  database: dbname_v9kr
   url: <%= ENV['DATABASE_URL'] %>
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
