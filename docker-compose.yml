@@ -9,13 +9,6 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql-data:/var/lib/mysql
-  db2:
-    postgres:
-      container_name: postgre-db
-      ports: '10000:3306'
-      environment:
-        POSTGRES_USER: dbuser
-        POSTGRES_PASSWORD: HuDcT0HNy5zQRVEo7Vt6c1566CUnxqEL
 
   web:
     build: .
