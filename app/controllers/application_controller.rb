@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-   
+    include SessionsHelper
 end
 # ActionController::Baseクラスとは
 # コントローラーの基本的な機能を提供するクラスです。
