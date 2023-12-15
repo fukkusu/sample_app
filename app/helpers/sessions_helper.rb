@@ -16,25 +16,31 @@ module SessionsHelper
     end
 
   
-      # 記憶トークンcookieに対応するユーザーを返す (BEFORE THE REMEMBER ME FUNCTION: 現在ログイン中のユーザーを返す（いる場合）
+    # 記憶トークンcookieに対応するユーザーを返す (BEFORE THE REMEMBER ME FUNCTION: 現在ログイン中のユーザーを返す（いる場合）
     def current_user
       if (user_id = session[:user_id]) #[:user_id] is the key that retrieves information from the session hash
         #  every value except for nil and false return true,
         #  so in the case above the condition checks if the user_id is nil and if it isn't,
         #  the user_id's session value is assigned to the user_id
    
-        # user = User.find_by(id: user_id)
-        
-       @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.encrypted[:user_id])
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token])
-        log_in user
-        @current_user = user
+        user = User.find_by(id: user_id)
+          if user && session[:session_token] == user.session_token
+            @current_user = user
+          end
+      elsif (user_id = cookies.encrypted[:user_id])
+        user = User.find_by(id: user_id)
+        if user && user.authenticated?(cookies[:remember_token])
+          log_in user
+          @current_user = user
+        end
       end
     end
-    end
   
+    # 渡されたユーザーがカレントユーザーであればtrueを返す
+    def current_user?(user)
+      user && user == current_user
+    end
+
     # ユーザーがログインしていればtrue、その他ならfalseを返す
     def logged_in?
       !current_user.nil?
@@ -53,5 +59,10 @@ module SessionsHelper
         reset_session
         @current_user = nil   # 安全のため
     end
+
+    # アクセスしようとしたURLを保存する
+    def store_location
+      session[:forwarding_url] = request.original_url if request.get?
+    end    
   end
   
