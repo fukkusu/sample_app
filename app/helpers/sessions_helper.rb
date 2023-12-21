@@ -50,6 +50,7 @@ module SessionsHelper
 
   # 現在のユーザーをログアウトする
   def log_out
+    forget(current_user)    #forgot this line, that's why with the remember_me function on, I couldn't log out anymore!!!
     reset_session
     @current_user = nil
   end
