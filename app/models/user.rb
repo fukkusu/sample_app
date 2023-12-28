@@ -85,15 +85,14 @@ class User < ApplicationRecord
   end
 
   # ユーザーのステータスフィードを返す
-  def feed
-    # Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
-    #  following_ids: following_ids, user_id: id)
-    following_ids = "SELECT followed_id FROM relationships
-                      WHERE  follower_id = :user_id"
-    Micropost.where("user_id IN (#{following_ids})
-                      OR user_id = :user_id", user_id: id)
-              .includes(:user, image_attachment: :blob)
-  end
+    def feed
+        # Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
+        #  following_ids: following_ids, user_id: id)
+      part_of_feed = "relationships.follower_id = :id or microposts.user_id = :id"
+      Micropost.left_outer_joins(user: :followers)
+               .where(part_of_feed, { id: id }).distinct
+               .includes(:user, image_attachment: :blob)
+    end
 
   # ユーザーをフォローする
   def follow(other_user)
@@ -112,15 +111,15 @@ class User < ApplicationRecord
 
   private
 
-    # メールアドレスをすべて小文字にする
-    def downcase_email
-      self.email = email.downcase
-    end
+  # メールアドレスをすべて小文字にする
+  def downcase_email
+    self.email = email.downcase
+  end
 
-    # 有効化トークンとダイジェストを作成および代入する
-    def create_activation_digest
-      self.activation_token  = User.new_token
-      puts "new_token #{activation_token}"
-      self.activation_digest = User.digest(activation_token)
-    end
+  # 有効化トークンとダイジェストを作成および代入する
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    puts "new_token #{activation_token}"
+    self.activation_digest = User.digest(activation_token)
+  end
 end
